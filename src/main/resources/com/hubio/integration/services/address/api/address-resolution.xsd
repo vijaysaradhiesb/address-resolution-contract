@@ -12,16 +12,34 @@
     <xs:import schemaLocation="contracts-common.xsd" namespace="http://hubio.com/integration/services/contracts/common"/>
 
 
-    <xs:complexType name="AbstractAddressLookupRequest" abstract="true">
+    <xs:complexType name="AbstractAddressLookupRequest" abstract="true"/>
+    <xs:complexType name="AbstractAddressLookupResponse" abstract="true"/>
+    <xs:complexType name="AbstractSearchAddressResponse" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractAddressLookupResponse"/>
+        </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="AbstractAddressLookupResponse" abstract="true">
+    <xs:complexType name="AbstractResolveAddressResponse" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractAddressLookupResponse"/>
+        </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="FaultResponse">
+
+    <xs:complexType name="SearchFaultResponse">
         <xs:complexContent>
-            <xs:extension base="tns:AbstractAddressLookupResponse">
+            <xs:extension base="tns:AbstractSearchAddressResponse">
                 <xs:sequence>
-                    <xs:element name="common:faultDetails" minOccurs="0" type="common:faultDetails"/>
+                    <xs:element name="faultDetails" minOccurs="0" type="common:faultDetails"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ResolutionFaultResponse">
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractResolveAddressResponse">
+                <xs:sequence>
+                    <xs:element name="faultDetails" minOccurs="0" type="common:faultDetails"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -58,7 +76,7 @@
                 </xs:appinfo>
             </xs:annotation>
             <xs:complexContent>
-                <xs:extension base="tns:AbstractAddressLookupResponse">
+                <xs:extension base="tns:AbstractResolveAddressResponse">
                     <xs:sequence>
                         <xs:element minOccurs="0" maxOccurs="1" name="language" type="xs:string"/>
                         <xs:element minOccurs="0" maxOccurs="1" name="languageAlternatives" type="xs:string"/>
@@ -107,16 +125,16 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:complexContent>
-                <xs:extension base="tns:AbstractAddressLookupResponse">
+                <xs:extension base="tns:AbstractSearchAddressResponse">
                     <xs:sequence>
-                        <xs:element name="address" minOccurs="0" maxOccurs="unbounded" type="tns:addressResolutionSummaryResult"/>
+                        <xs:element name="address" minOccurs="0" maxOccurs="unbounded" type="tns:SearchResult"/>
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="addressResolutionSummaryResult">
+    <xs:complexType name="SearchResult">
         <xs:sequence>
             <xs:element minOccurs="1" maxOccurs="1" name="searchResult" type="xs:string"/>
             <xs:element minOccurs="0" maxOccurs="1" name="searchResultDescription" type="xs:string"/>
@@ -138,7 +156,7 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:complexContent>
-                <xs:extension base="tns:FaultResponse"/>
+                <xs:extension base="tns:ResolutionFaultResponse"/>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
@@ -153,7 +171,7 @@
                 </xs:appinfo>
             </xs:annotation>
             <xs:complexContent>
-                <xs:extension base="tns:FaultResponse">
+                <xs:extension base="tns:SearchFaultResponse">
                     <xs:sequence>
                         <xs:element name="specificError" type="tns:BadRequestErrorCode"/>
                     </xs:sequence>
@@ -172,14 +190,13 @@
                 </xs:appinfo>
             </xs:annotation>
             <xs:complexContent>
-                <xs:extension base="tns:FaultResponse"/>
+                <xs:extension base="tns:SearchFaultResponse"/>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
 
     <xs:simpleType name="BadRequestErrorCode">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="INVALID_DATA_FOUND"/>
             <xs:enumeration value="MAPPING_ERROR"/>
             <xs:enumeration value="COUNTRY_VALUE_NOT_RECOGNISED_BY_3RD_PARTY_PROVIDER_SERVICE"/>
         </xs:restriction>

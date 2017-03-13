@@ -12,10 +12,10 @@ public interface AddressLookupService {
     @Path("/search")
     @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    AbstractAddressLookupResponse search(SearchRequest searchRequest);
+    AbstractSearchAddressResponse search(SearchRequest searchRequest);
 
     @GET
     @Path("/resolve/{id}")
     @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    AbstractAddressLookupResponse resolve(@PathParam("id") String id);
+    AbstractResolveAddressResponse resolve(@PathParam("id") String id);
 }
