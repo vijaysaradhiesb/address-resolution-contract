@@ -7,7 +7,7 @@
             jaxb:extensionBindingPrefixes="annox"
             jaxb:version="2.0"
             targetNamespace="http://hubio.com/integration/services/address/api" attributeFormDefault="unqualified"
-            elementFormDefault="qualified">
+            elementFormDefault="unqualified">
     
     <xs:import schemaLocation="contracts-common.xsd" namespace="http://hubio.com/integration/services/contracts/common"/>
 
@@ -59,7 +59,34 @@
                     <xs:sequence>
                         <xs:element minOccurs="1" maxOccurs="1" name="searchTerm" type="xs:string"/>
                         <xs:element minOccurs="0" maxOccurs="1" name="partialAddressId" type="xs:string"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="country" type="xs:string"/>
+                        <xs:element minOccurs="1" maxOccurs="1" name="country" type="common:RefData">
+                            <xs:annotation>
+                                <xs:appinfo>
+                                    <annox:annotate target="field">
+                                        @com.hubio.services.external.systems.mappings.api.RefDataMappingAware(source=SourceSystem.DEFINED, refDataType="COUNTRY")
+                                    </annox:annotate>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ResolveRequest">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:appinfo>
+                    <annox:annotate target="field">
+                        @com.hubio.integration.services.contracts.common.rest.Request
+                    </annox:annotate>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:extension base="tns:AbstractAddressLookupRequest">
+                    <xs:sequence>
+                        <xs:element minOccurs="1" maxOccurs="1" name="id" type="xs:string"/>
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
@@ -96,12 +123,25 @@
                         <xs:element minOccurs="0" maxOccurs="1" name="line3" type="xs:string"/>
                         <xs:element minOccurs="0" maxOccurs="1" name="line4" type="xs:string"/>
                         <xs:element minOccurs="0" maxOccurs="1" name="line5" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="province" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="provinceName" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="provinceCode" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="province" type="common:RefData">
+                            <xs:annotation>
+                                <xs:appinfo>
+                                    <annox:annotate target="field">
+                                        @com.hubio.services.external.systems.mappings.api.RefDataMappingAware(source=SourceSystem.DEFINED, refDataType="PROVINCE")
+                                    </annox:annotate>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
                         <xs:element minOccurs="0" maxOccurs="1" name="postalCode" type="xs:string"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="countryName" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="countryCode" type="xs:string"/>
+                        <xs:element minOccurs="1" maxOccurs="1" name="country" type="common:RefData">
+                            <xs:annotation>
+                                <xs:appinfo>
+                                    <annox:annotate target="field">
+                                        @com.hubio.services.external.systems.mappings.api.RefDataMappingAware(source=SourceSystem.DEFINED, refDataType="COUNTRY")
+                                    </annox:annotate>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
                         <xs:element minOccurs="0" maxOccurs="1" name="gridEastM" type="xs:int"/>
                         <xs:element minOccurs="0" maxOccurs="1" name="gridNorthM" type="xs:int"/>
                         <xs:element minOccurs="0" maxOccurs="1" name="latitude" type="xs:double"/>

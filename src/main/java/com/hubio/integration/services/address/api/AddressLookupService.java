@@ -1,11 +1,12 @@
 package com.hubio.integration.services.address.api;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-/**
- * Created by Saradhi on 09/09/2016.
- */
+@Path("/")
 public interface AddressLookupService {
 
     @POST
@@ -14,8 +15,9 @@ public interface AddressLookupService {
     @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
     AbstractSearchAddressResponse search(SearchRequest searchRequest);
 
-    @GET
-    @Path("/resolve/{id}")
+    @POST
+    @Path("/resolve")
+    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    AbstractResolveAddressResponse resolve(@PathParam("id") String id);
+    AbstractResolveAddressResponse resolve(ResolveRequest resolveRequest);
 }
