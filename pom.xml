@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -12,7 +11,7 @@
 
     <groupId>com.hubio.integration.contract</groupId>
     <artifactId>address-resolution-contract</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>bundle</packaging>
     <name>${organization.name} :: ${module.name}</name>
     <properties>
@@ -29,7 +28,8 @@
         <connection>${scm.protocol}${scm.git.protocol}${scm.host}:${scm.ssh.port}/iic/address-resolution-contract.git</connection>
         <developerConnection>${scm.protocol}${scm.git.protocol}${scm.host}:${scm.ssh.port}/iic/address-resolution-contract.git</developerConnection>
         <url>http://${scm.host}:${scm.http.port}/projects/iic/repos/address-resolution-contract/</url>
-    </scm>
+      <tag>address-resolution-contract-1.0.1</tag>
+  </scm>
 
     <dependencies>
         <dependency>
@@ -57,8 +57,8 @@
                         </goals>
                         <configuration>
                             <target>
-                                <copy file="${basedir}/target/schemas/com/hubio/integration/services/contracts/common/contracts-common.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/contracts-common.xsd"/>
-                                <copy file="${basedir}/src/main/resources/com/hubio/integration/services/address/api/address-resolution.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/address-resolution.xsd"/>
+                                <copy file="${basedir}/target/schemas/com/hubio/integration/services/contracts/common/contracts-common.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/contracts-common.xsd" />
+                                <copy file="${basedir}/src/main/resources/com/hubio/integration/services/address/api/address-resolution.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/address-resolution.xsd" />
                             </target>
                         </configuration>
                     </execution>
