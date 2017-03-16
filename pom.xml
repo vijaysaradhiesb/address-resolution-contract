@@ -25,6 +25,12 @@
         <hubio.model.xsd.directory>${basedir}/target/classes/com/hubio/integration/services/address/api/</hubio.model.xsd.directory>
     </properties>
 
+    <scm>
+        <connection>${scm.protocol}${scm.git.protocol}${scm.host}:${scm.ssh.port}/iic/address-resolution-contract.git</connection>
+        <developerConnection>${scm.protocol}${scm.git.protocol}${scm.host}:${scm.ssh.port}/iic/address-resolution-contract.git</developerConnection>
+        <url>http://${scm.host}:${scm.http.port}/projects/iic/repos/address-resolution-contract/</url>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.camel</groupId>
