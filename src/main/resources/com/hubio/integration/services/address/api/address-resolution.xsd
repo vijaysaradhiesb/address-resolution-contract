@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://hubio.com/integration/services/address/api"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+            xmlns:annox="http://annox.dev.java.net"
+            xmlns:common="http://hubio.com/integration/services/contracts/common"
+            jaxb:extensionBindingPrefixes="annox"
+            jaxb:version="2.0"
+            targetNamespace="http://hubio.com/integration/services/address/api" attributeFormDefault="unqualified"
+            elementFormDefault="unqualified">
+    
+    <xs:import schemaLocation="contracts-common.xsd" namespace="http://hubio.com/integration/services/contracts/common"/>
+
+
+    <xs:complexType name="AbstractAddressLookupRequest" abstract="true">
+        <xs:sequence>
+            <xs:element name="ReqSys" minOccurs="1" maxOccurs="1" nillable="false" type="tns:ReqSys">
+                <xs:annotation>
+                    <xs:documentation>
+                        Unique requester system identification
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AbstractAddressLookupResponse" abstract="true"/>
+    <xs:complexType name="AbstractSearchAddressResponse" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractAddressLookupResponse"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AbstractResolveAddressResponse" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractAddressLookupResponse"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="SearchFaultResponse">
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractSearchAddressResponse">
+                <xs:sequence>
+                    <xs:element name="faultDetails" minOccurs="0" type="common:faultDetails"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ResolutionFaultResponse">
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractResolveAddressResponse">
+                <xs:sequence>
+                    <xs:element name="faultDetails" minOccurs="0" type="common:faultDetails"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="SearchRequest">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:appinfo>
+                    <annox:annotate target="field">
+                        @com.hubio.integration.services.contracts.common.rest.Request
+                    </annox:annotate>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:extension base="tns:AbstractAddressLookupRequest">
+                    <xs:sequence>
+                        <xs:element minOccurs="1" maxOccurs="1" name="searchTerm" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="partialAddressId" type="xs:string"/>
+                        <xs:element minOccurs="1" maxOccurs="1" name="country" type="common:RefData">
+                            <xs:annotation>
+                                <xs:appinfo>
+                                    <annox:annotate target="field">
+                                        @com.hubio.services.external.systems.mappings.api.RefDataMappingAware(source=SourceSystem.DEFINED, refDataType="COUNTRY")
+                                    </annox:annotate>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ResolveRequest">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:appinfo>
+                    <annox:annotate target="field">
+                        @com.hubio.integration.services.contracts.common.rest.Request
+                    </annox:annotate>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:extension base="tns:AbstractAddressLookupRequest">
+                    <xs:sequence>
+                        <xs:element minOccurs="1" maxOccurs="1" name="id" type="xs:string"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ResolutionResponse">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:appinfo>
+                    <annox:annotate target="field">
+                        @com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.OK)
+                    </annox:annotate>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:extension base="tns:AbstractResolveAddressResponse">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="1" name="language" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="languageAlternatives" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="department" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="company" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="subBuilding" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="buildingNumber" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="buildingName" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="secondaryStreet" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="street" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="block" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="neighbourhood" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="district" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="city" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="line1" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="line2" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="line3" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="line4" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="line5" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="province" type="common:RefData">
+                            <xs:annotation>
+                                <xs:appinfo>
+                                    <annox:annotate target="field">
+                                        @com.hubio.services.external.systems.mappings.api.RefDataMappingAware(source=SourceSystem.DEFINED, refDataType="PROVINCE")
+                                    </annox:annotate>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element minOccurs="0" maxOccurs="1" name="postalCode" type="xs:string"/>
+                        <xs:element minOccurs="1" maxOccurs="1" name="country" type="common:RefData">
+                            <xs:annotation>
+                                <xs:appinfo>
+                                    <annox:annotate target="field">
+                                        @com.hubio.services.external.systems.mappings.api.RefDataMappingAware(source=SourceSystem.DEFINED, refDataType="COUNTRY")
+                                    </annox:annotate>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element minOccurs="0" maxOccurs="1" name="gridEastM" type="xs:int"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="gridNorthM" type="xs:int"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="latitude" type="xs:double"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="longitude" type="xs:double"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SearchResponse">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:appinfo>
+                    <annox:annotate target="field">
+                        @com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.OK)
+                    </annox:annotate>
+                </xs:appinfo>
+                <xs:documentation>
+                    Returns search results. If none found, empty list is returned.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:extension base="tns:AbstractSearchAddressResponse">
+                    <xs:sequence>
+                        <xs:element name="address" minOccurs="0" maxOccurs="unbounded" type="tns:SearchResult"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="SearchResult">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="searchResult" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="searchResultDescription" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute use="required" name="itemId" type="xs:string"/>
+        <xs:attribute use="required" name="partialResult" type="xs:boolean"/>
+    </xs:complexType>
+
+    <xs:element name="AddressIdNotFoundFailure">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:appinfo>
+                    <annox:annotate target="field">
+                        @com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.NOT_FOUND)
+                    </annox:annotate>
+                </xs:appinfo>
+                <xs:documentation>
+                    This fault will be returned if requested address ID is not found. It will not be returned when search string will resolve to nothing.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:extension base="tns:ResolutionFaultResponse"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BadRequestFailure">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:appinfo>
+                    <annox:annotate target="field">
+                        @com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.BAD_REQUEST)
+                    </annox:annotate>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:extension base="tns:SearchFaultResponse">
+                    <xs:sequence>
+                        <xs:element name="specificError" type="tns:BadRequestErrorCode"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TimedOutFailure">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:appinfo>
+                    <annox:annotate target="field">
+                        @com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.REQUEST_TIMEOUT)
+                    </annox:annotate>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:extension base="tns:SearchFaultResponse"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="BadRequestErrorCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MAPPING_ERROR"/>
+            <xs:enumeration value="COUNTRY_VALUE_NOT_RECOGNISED_BY_3RD_PARTY_PROVIDER_SERVICE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ReqSys">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ice-policy"/>
+            <xs:enumeration value="ice-claims"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

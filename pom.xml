@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.hubio.integration.service</groupId>
+        <artifactId>integration-contracts-parent</artifactId>
+        <version>[1.0,2)</version>
+    </parent>
+
+    <groupId>com.hubio.integration.contract</groupId>
+    <artifactId>address-resolution-contract</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+    <name>${organization.name} :: ${module.name}</name>
+    <properties>
+        <module.name>Address Resolution Contract</module.name>
+        <organization.name>Hubio</organization.name>
+
+        <!-- package name under which: model will be generated, exposed in OSGi, processed by DTO plugin -->
+        <hubio.model.package>com.hubio.integration.services.address.api</hubio.model.package>
+        <!-- schema directory containing this project XSDs as well as all others from dependent projects like Contract Commons, has to be in target -->
+        <hubio.model.xsd.directory>${basedir}/target/classes/com/hubio/integration/services/address/api/</hubio.model.xsd.directory>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cxf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hubio.integration.contract</groupId>
+            <artifactId>contracts-common</artifactId>
+            <version>${contracts-common.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Copying is actually the only plugin we have to configure here. Rest is done by plugins defined in parent project -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy file="${basedir}/target/schemas/com/hubio/integration/services/contracts/common/contracts-common.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/contracts-common.xsd"/>
+                                <copy file="${basedir}/src/main/resources/com/hubio/integration/services/address/api/address-resolution.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/address-resolution.xsd"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
