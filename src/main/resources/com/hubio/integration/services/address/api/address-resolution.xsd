@@ -12,7 +12,18 @@
     <xs:import schemaLocation="contracts-common.xsd" namespace="http://hubio.com/integration/services/contracts/common"/>
 
 
-    <xs:complexType name="AbstractAddressLookupRequest" abstract="true"/>
+    <xs:complexType name="AbstractAddressLookupRequest" abstract="true">
+        <xs:sequence>
+            <xs:element name="ReqSys" minOccurs="1" maxOccurs="1" nillable="false" type="tns:ReqSys">
+                <xs:annotation>
+                    <xs:documentation>
+                        Unique requester system identification
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:complexType name="AbstractAddressLookupResponse" abstract="true"/>
     <xs:complexType name="AbstractSearchAddressResponse" abstract="true">
         <xs:complexContent>
@@ -239,6 +250,13 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="MAPPING_ERROR"/>
             <xs:enumeration value="COUNTRY_VALUE_NOT_RECOGNISED_BY_3RD_PARTY_PROVIDER_SERVICE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ReqSys">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ice-policy"/>
+            <xs:enumeration value="ice-claims"/>
         </xs:restriction>
     </xs:simpleType>
 
