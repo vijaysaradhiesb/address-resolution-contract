@@ -11,7 +11,7 @@
 
     <groupId>com.hubio.integration.contract</groupId>
     <artifactId>address-resolution-contract</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
     <packaging>bundle</packaging>
     <name>${organization.name} :: ${module.name}</name>
     <properties>
@@ -28,7 +28,7 @@
         <connection>${scm.protocol}${scm.git.protocol}${scm.host}:${scm.ssh.port}/iic/address-resolution-contract.git</connection>
         <developerConnection>${scm.protocol}${scm.git.protocol}${scm.host}:${scm.ssh.port}/iic/address-resolution-contract.git</developerConnection>
         <url>http://${scm.host}:${scm.http.port}/projects/iic/repos/address-resolution-contract/</url>
-      <tag>HEAD</tag>
+      <tag>address-resolution-contract-1.0.3</tag>
   </scm>
 
     <dependencies>
