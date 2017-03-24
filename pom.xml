@@ -59,6 +59,7 @@
                             <target>
                                 <copy file="${basedir}/target/schemas/com/hubio/integration/services/contracts/common/contracts-common.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/contracts-common.xsd" />
                                 <copy file="${basedir}/src/main/resources/com/hubio/integration/services/address/api/address-resolution.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/address-resolution.xsd" />
+                                <copy file="${basedir}/src/main/resources/com/hubio/integration/services/address/api/address-resolution.xjb" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/address-resolution.xjb" />
                             </target>
                         </configuration>
                     </execution>
