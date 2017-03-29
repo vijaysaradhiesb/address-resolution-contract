@@ -25,8 +25,8 @@ public interface AddressLookupService {
     AbstractSearchAddressResponse search(@PathParam("countryCode") String countryCode, @QueryParam("searchTerm") String searchTerm, @QueryParam("partialAddressId") String partialAddressId);
 
     @GET
-    @Path("/resolve/{addressId}")
+    @Path("/resolve")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    AbstractResolveAddressResponse resolve(@PathParam("addressId") String addressId);
+    AbstractResolveAddressResponse resolve(@QueryParam("addressId") String addressId);
 }
