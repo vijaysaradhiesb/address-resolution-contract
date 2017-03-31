@@ -22,13 +22,11 @@ public interface AddressLookupService {
 
     @GET
     @Path("/search/{countryCode}")
-    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     AbstractSearchAddressResponse search(@PathParam("countryCode") String countryCode, @QueryParam("searchTerm") String searchTerm, @QueryParam("partialAddressId") String partialAddressId);
 
     @GET
     @Path("/resolve")
-    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     AbstractResolveAddressResponse resolve(@QueryParam("addressId") @Header("addressId") String addressId);
 }
