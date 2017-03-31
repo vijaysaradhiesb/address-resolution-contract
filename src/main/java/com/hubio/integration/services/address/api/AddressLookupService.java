@@ -1,5 +1,7 @@
 package com.hubio.integration.services.address.api;
 
+import org.apache.camel.Header;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -28,5 +30,5 @@ public interface AddressLookupService {
     @Path("/resolve")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    AbstractResolveAddressResponse resolve(@QueryParam("addressId") String addressId);
+    AbstractResolveAddressResponse resolve(@QueryParam("addressId") @Header("addressId") String addressId);
 }
