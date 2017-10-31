@@ -28,13 +28,13 @@
         <jxb:bindings node="xs:element[@name='SearchResponse']/xs:complexType">
             <annox:annotateClass>@com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.OK)</annox:annotateClass>
         </jxb:bindings>
-        <jxb:bindings node="xs:element[@name='AddressIdNotFoundFailure']/xs:complexType">
+        <jxb:bindings node="xs:element[@name='AddressIdNotFoundException']/xs:complexType">
             <annox:annotateClass>@com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.NOT_FOUND)</annox:annotateClass>
         </jxb:bindings>
-        <jxb:bindings node="xs:element[@name='BadRequestFailure']/xs:complexType">
+        <jxb:bindings node="xs:element[@name='BadRequestException']/xs:complexType">
             <annox:annotateClass>@com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.BAD_REQUEST)</annox:annotateClass>
         </jxb:bindings>
-        <jxb:bindings node="xs:element[@name='TimedOutFailure']/xs:complexType">
+        <jxb:bindings node="xs:element[@name='TimedOutException']/xs:complexType">
             <annox:annotateClass>@com.hubio.integration.services.contracts.common.rest.ResponseCode(value = javax.ws.rs.core.Response.Status.REQUEST_TIMEOUT)</annox:annotateClass>
         </jxb:bindings>
     </jxb:bindings>
