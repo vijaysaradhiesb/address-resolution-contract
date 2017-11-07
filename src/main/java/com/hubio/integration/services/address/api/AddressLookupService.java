@@ -1,6 +1,7 @@
 package com.hubio.integration.services.address.api;
 
 import com.hubio.integration.services.contracts.common.GenericInternalServerException;
+import org.apache.camel.Body;
 import org.apache.camel.Header;
 
 import javax.ws.rs.*;
@@ -11,15 +12,15 @@ public interface AddressLookupService {
 
     @POST
     @Path("/search")
-    @Consumes({MediaType.TEXT_XML})
-    @Produces({MediaType.TEXT_XML})
-    SearchResponse search(SearchRequest searchRequest) throws BadRequestException, TimedOutException, GenericInternalServerException;
+    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
+    SearchResponse search(@Body SearchRequest searchRequest) throws BadRequestException, TimedOutException, GenericInternalServerException;
 
     @POST
     @Path("/resolve")
-    @Consumes({MediaType.TEXT_XML})
-    @Produces({MediaType.TEXT_XML})
-    ResolutionResponse resolve(ResolveRequest resolveRequest) throws BadRequestException, TimedOutException, AddressIdNotFoundException, GenericInternalServerException;
+    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
+    ResolutionResponse resolve(@Body ResolveRequest resolveRequest) throws BadRequestException, TimedOutException, AddressIdNotFoundException, GenericInternalServerException;
 
     @GET
     @Path("/search/{countryCode}")
