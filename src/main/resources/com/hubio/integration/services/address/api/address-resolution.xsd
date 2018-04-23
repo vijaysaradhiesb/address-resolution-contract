@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-            xmlns:tns="http://hubio.com/integration/services/address/api"
-            xmlns:common="http://hubio.com/integration/services/contracts/common"
-            targetNamespace="http://hubio.com/integration/services/address/api" attributeFormDefault="unqualified"
+            xmlns:tns="http://integ.com/integration/services/address/api"
+            xmlns:common="http://integ.com/integration/services/contracts/common"
+            targetNamespace="http://integ.com/integration/services/address/api" attributeFormDefault="unqualified"
             elementFormDefault="unqualified">
     
-    <xs:import schemaLocation="contracts-common.xsd" namespace="http://hubio.com/integration/services/contracts/common"/>
+    <xs:import schemaLocation="contracts-common.xsd" namespace="http://integ.com/integration/services/contracts/common"/>
 
 
     <xs:complexType name="AbstractAddressLookupRequest" abstract="true">

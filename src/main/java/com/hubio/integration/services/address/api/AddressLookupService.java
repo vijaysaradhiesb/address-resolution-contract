@@ -1,6 +1,6 @@
-package com.hubio.integration.services.address.api;
+package com.integ.integration.services.address.api;
 
-import com.hubio.integration.services.contracts.common.GenericInternalServerException;
+import com.integ.integration.services.contracts.common.GenericInternalServerException;
 import org.apache.camel.Body;
 import org.apache.camel.Header;
 

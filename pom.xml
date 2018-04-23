@@ -4,24 +4,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.hubio.integration.service</groupId>
+        <groupId>com.integ.integration.service</groupId>
         <artifactId>integration-contracts-parent</artifactId>
         <version>[2.0,3)</version>
     </parent>
 
-    <groupId>com.hubio.integration.contract</groupId>
+    <groupId>com.integ.integration.contract</groupId>
     <artifactId>address-resolution-contract</artifactId>
     <version>2.0.3-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>${organization.name} :: ${module.name}</name>
     <properties>
         <module.name>Address Resolution Contract</module.name>
-        <organization.name>Hubio</organization.name>
+        <organization.name>integ</organization.name>
 
         <!-- package name under which: model will be generated, exposed in OSGi, processed by DTO plugin -->
-        <hubio.model.package>com.hubio.integration.services.address.api</hubio.model.package>
+        <integ.model.package>com.integ.integration.services.address.api</integ.model.package>
         <!-- schema directory containing this project XSDs as well as all others from dependent projects like Contract Commons, has to be in target -->
-        <hubio.model.xsd.directory>${basedir}/target/classes/com/hubio/integration/services/address/api/</hubio.model.xsd.directory>
+        <integ.model.xsd.directory>${basedir}/target/classes/com/integ/integration/services/address/api/</integ.model.xsd.directory>
     </properties>
 
     <scm>
@@ -37,7 +37,7 @@
             <artifactId>camel-cxf</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hubio.integration.contract</groupId>
+            <groupId>com.integ.integration.contract</groupId>
             <artifactId>contracts-common</artifactId>
             <version>${contracts-common.version}</version>
         </dependency>
@@ -57,9 +57,9 @@
                         </goals>
                         <configuration>
                             <target>
-                                <copy file="${basedir}/target/schemas/com/hubio/integration/services/contracts/common/contracts-common.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/contracts-common.xsd" />
-                                <copy file="${basedir}/src/main/resources/com/hubio/integration/services/address/api/address-resolution.xsd" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/address-resolution.xsd" />
-                                <copy file="${basedir}/src/main/resources/com/hubio/integration/services/address/api/address-resolution.xjb" tofile="${basedir}/target/classes/com/hubio/integration/services/address/api/address-resolution.xjb" />
+                                <copy file="${basedir}/target/schemas/com/integ/integration/services/contracts/common/contracts-common.xsd" tofile="${basedir}/target/classes/com/integ/integration/services/address/api/contracts-common.xsd" />
+                                <copy file="${basedir}/src/main/resources/com/integ/integration/services/address/api/address-resolution.xsd" tofile="${basedir}/target/classes/com/integ/integration/services/address/api/address-resolution.xsd" />
+                                <copy file="${basedir}/src/main/resources/com/integ/integration/services/address/api/address-resolution.xjb" tofile="${basedir}/target/classes/com/integ/integration/services/address/api/address-resolution.xjb" />
                             </target>
                         </configuration>
                     </execution>
